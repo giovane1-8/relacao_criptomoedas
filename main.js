@@ -1,3 +1,4 @@
+const { NONAME } = require('dns')
 const { app, BrowserWindow } = require('electron')
 
 
