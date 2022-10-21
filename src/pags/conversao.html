@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Converter moedas</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/bootstrap.min.css'>
+    <style>
+        li.nav-item {
+            text-align: left !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 sticky-top" id="navbar" style="transition: 0.5s;">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav mr-auto nav-pills nav-fill">
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="index.html">Minhas moedas</a>
+                    </li>
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="conversao.html">Conversão</a>
+                    </li>
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="#">Conversão</a>
+                    </li>
+
+                </ul>
+                <form autocomplete="off" class="form-inline my-2 my-lg-0">
+
+                    <div class="dropdown">
+                        <input class="form-control mr-sm-2 dropdown-toggle" type="search" id="pesquisarMangaAjax"
+                            placeholder="Pesquisar" aria-label="Pesquisar" data-toggle="dropdown">
+
+                        <div class="dropdown-menu" id='dropPesquisa' aria-labelledby="dropdownMenuButton">
+
+                        </div>
+
+                    </div>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                    Total de investimento:
+                </label>
+                <select class="custom-select" style="border-radius: 0px;">
+                    <option selected>Escolher...</option>
+                    <option value="0">BTC</option>
+                    <option value="1" selected>BRL</option>
+                    <option value="2">GALA</option>
+                </select>
+
+            </div>
+            <input type="text" value="1" id="total_investimento" class="form-control" placeholder="100.00">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                    Valor moeda final:
+                </label>
+
+                <select class="custom-select" style="border-radius: 0px;">
+                    <option selected>Escolher...</option>
+                    <option value="0">BTC</option>
+                    <option value="1">BRL</option>
+                    <option value="2" selected>GALA</option>
+                </select>
+
+            </div>
+            <input type="text" value="1" class="form-control" id="moeda_final" placeholder="0.205">
+        </div>
+
+
+
+        <hr>
+        <div class="h3 text-center">Moedas de transição</div>
+
+
+
+        <div class="d-flex">
+
+            <div class="input-group col-6">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                        Valor comprar:
+                    </label>
+                    <select class="custom-select" style="border-radius: 0px;">
+                        <option selected>Escolher...</option>
+                        <option value="0" selected>BTC</option>
+                        <option value="1">BRL</option>
+                        <option value="2">GALA</option>
+                    </select>
+                </div>
+                <input type="text" id="valor_moeda_transicao" value="1" class="form-control " placeholder="100650.00">
+            </div>
+
+            <div class="input-group col-6">
+
+                <div class="input-group-prepend ">
+                    <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                        Valor moeda final:
+                    </label>
+
+                    <select class="custom-select" style="border-radius: 0px; min-width: 80px;">
+                        <option selected>Escolher...</option>
+                        <option value="0">BTC</option>
+                        <option value="1">BRL</option>
+                        <option value="2" selected>GALA</option>
+                    </select>
+
+                </div>
+                <input type="text" id="moeda_final_transicao" value="1" class="form-control" placeholder="100650.00">
+            </div>
+
+        </div>
+
+
+        <div class="container text-center" id="resultado">
+            moeda 1 -> moeda 2 = tanto<br>
+            moeda 1 -> moeda 2 -> moeda 3 = tanto
+        </div>
+    </div>
+    <script src='../js/jquery-3.3.1.slim.min.js'></script>
+    <script src='../js/popper.min.js'></script>
+    <script src='../js/bootstrap.min.js'></script>
+    <!--<script src="../js/index.js"></script>-->
+    <script src="../js/conversao.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            $("input").change(function () {
+                moeda_final = $("#moeda_final").val();
+                moeda_final_transicao = $("#moeda_final_transicao").val();
+                valor_investimento = $("#total_investimento").val();
+                valor_moeda_trasicao = $("#valor_moeda_transicao").val();
+                comparacao_conversao_compra(moeda_final, moeda_final_transicao, valor_investimento, valor_moeda_trasicao);
+            });
+
+        })
+
+    </script>
+</body>
+
+</html>

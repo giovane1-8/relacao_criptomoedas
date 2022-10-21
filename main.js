@@ -9,15 +9,17 @@ var createWindow = (configs) => {
   win.webContents.openDevTools()
 
   win.loadFile('src/pags/index.html')
+
+  return win
 }
 app.whenReady().then(() => {
-  
-  
-  createWindow({
+
+
+  janela_inicial = createWindow({
     height: 720,
     width: 1200,
-    webPreferences:{
-      preload: path.join(__dirname,"src/js/preload/index.js")
+    webPreferences: {
+      preload: path.join(__dirname, "src/js/preload/index.js")
     }
   })
 
@@ -27,6 +29,10 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
+
+
+  
 })
 
 app.on('window-all-closed', () => {
