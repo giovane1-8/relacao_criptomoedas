@@ -1,8 +1,13 @@
-const { NONAME } = require('dns')
 const { app, BrowserWindow } = require('electron')
 
-
 const path = require('path')
+const electronreload = require('electron-reload')(__dirname, {
+  electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+});
+
+
+
+
 var createWindow = (configs) => {
 
   var win = new BrowserWindow(configs)
@@ -24,6 +29,8 @@ app.whenReady().then(() => {
   })
 
 
+  
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -32,7 +39,7 @@ app.whenReady().then(() => {
 
 
 
-  
+
 })
 
 app.on('window-all-closed', () => {
