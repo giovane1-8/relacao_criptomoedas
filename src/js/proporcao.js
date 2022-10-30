@@ -1,32 +1,53 @@
-moedas = []
-moeda1 = []
+coins = {
+    'allCoins': [],
+    'saleCoin': [],
+    'buyCoin': []
+}
 setInterval(function () {
-    getMoedas()
-    printDados()
+    getMoedas();
+    printAllCoins();
 
-}, 800);
+}, 1000);
 
 async function getMoedas() {
-    moedas = await fetch("https://www.binance.com/api/v3/ticker/price", {
+    coins.allCoins = await fetch("https://www.binance.com/api/v3/ticker/price", {
         method: "GET"
     });
-    moedas = await moedas.json()
+    coins.allCoins = await coins.allCoins.json()
 }
 
-
 function separarMoedas(coin) {
-    for (var i = 0; i < moedas.length; i++) {
-        if (moedas[i].symbol.match("/" + coin + "/")) {
-            moeda1.push(moedas[i]);
-            console.log("Achou")
+    for (const i in coins.allCoins) {
+        if (coins.allCoins[i].symbol.includes(coin)) {
+            coins.saleCoin.push(coins.allCoins[i]);
+        } else {
+            coins.buyCoin.push(coins.allCoins[i]);
         }
     }
 }
 
-function printDados() {
+$("#moedaVendaInput").keypress(function (e) {
+    if (e.keyCode == 13) {
+        coins.saleCoin = []
+        coins.buyCoin = []
+        let coin = ($(this).val()).toUpperCase()
+        separarMoedas(coin)
+
+        let input = $("#moedaCompraInput")
+        $.each(coins.saleCoin, function (indexInArray, valueOfElement) {
+            const ocoin = valueOfElement.symbol.split(coin)[0]
+            input.append("<option value=" + ocoin + ">" + ocoin + "</option>")
+        });
+    }
+});
+
+function printAllCoins() {
     var div = $("#moedas");
     div.html(" ")
-    moedas.forEach(element => {
+    coins.allCoins.forEach(element => {
         div.append("Moeda: " + element.symbol + " Preço: " + element.price + "<br>")
     });
 }
+$("#moedaCompraInput").click(function (e) {
+    console.log($(this).val())
+});
