@@ -27,18 +27,24 @@ function separarMoedas(coin) {
 }
 
 $("#moedaVendaInput").keypress(function (e) {
-    if (e.keyCode == 13) {
-        coins.saleCoin = []
-        coins.buyCoin = []
-        let coin = ($(this).val()).toUpperCase()
-        separarMoedas(coin)
-        let input = $("#moedaCompraInput")
-        input.html("")
-        $.each(coins.saleCoin, function (indexInArray, valueOfElement) {
-            const ocoin = valueOfElement.symbol.split(coin)[0]
-            input.append("<option value=" + indexInArray + ">" + ocoin + "</option>")
-        });
-    }
+    coins.saleCoin = []
+    coins.buyCoin = []
+    let coin = ($(this).val()).toUpperCase()
+    separarMoedas(coin)
+    let input = $("#moedaCompraInput")
+    input.html("")
+
+    coins.saleCoin.sort((a, b) => {
+        if (a.symbol < b.symbol)
+            return -1
+        if (a.symbol > b.symbol)
+            return 1
+    })
+
+    $.each(coins.saleCoin, function (indexInArray, valueOfElement) {
+        const ocoin = valueOfElement.symbol.split(coin)[0]
+        input.append("<option value=" + indexInArray + ">" + ocoin + "</option>")
+    });
 });
 
 function printCoins() {
@@ -62,15 +68,16 @@ function insertionSort(inputArr) {
     }
     return inputArr;
 }
+
 function get_transition_coin(coin) {
     for (const i in coins.buyCoin) {
         if (coins.buyCoin[i].symbol.indexOf(coin) == 0) {
             return coins.buyCoin[i];
         }
     }
-
     return false
 }
+
 $("#moedaCompraInput").click(function (e) {
     let div = $("#moedas");
     div.html(" ");
@@ -78,7 +85,7 @@ $("#moedaCompraInput").click(function (e) {
 
     let _buy_coin = _sale_coin.symbol.split($("#moedaVendaInput").val().toUpperCase())[0]
 
-    div.append("<div class='h4'>" + _sale_coin.symbol + ":" + _sale_coin.price + "</div>")
+    $("#buycoin").html("<div class='h4'>" + _sale_coin.symbol + ":" + _sale_coin.price + "</div>")
     let _transitions_coins = []
     for (const i in coins.saleCoin) {
         const _coin = coins.saleCoin[i].symbol.split($("#moedaVendaInput").val().toUpperCase())[0]
@@ -89,16 +96,19 @@ $("#moedaCompraInput").click(function (e) {
                 _coins_transition.saleCoin = []
                 _coins_transition.saleCoin.price = coins.saleCoin[i].price
                 _coins_transition.saleCoin.symbol = coins.saleCoin[i].symbol
-
-
                 _transitions_coins.push(_coins_transition)
             }
         }
     }
+
     insertionSort(_transitions_coins)
 
-
     for (const i in _transitions_coins) {
-        div.append("<div class='bg-light col-auto mr-2 h5 mb-1 border border-dark'>" + _transitions_coins[i].saleCoin.symbol + ": " + _transitions_coins[i].saleCoin.price + "&darr;<br>" + _transitions_coins[i].symbol + ": " + _transitions_coins[i].price + "&uarr;<br>= " + _transitions_coins[i].value + "&darr;</div>")
+        if (_transitions_coins[i].value < _sale_coin.price) {
+            div.append("<div class='text-monospace bg-light col-2 mr-4 h5 mb-4 pt-2 rounded shadow'style='border: 1px black dotted;'>&darr;<font class='font-weight-bold text-danger'>" + _transitions_coins[i].saleCoin.price + " " + _transitions_coins[i].saleCoin.symbol + "</font><br>&uarr;<font class='font-weight-bold text-success'>" + _transitions_coins[i].price + " " + _transitions_coins[i].symbol + "</font><hr class='my-1'style='border: 1px black dotted;'> &darr;<font class='font-weight-bold text-success'>" + _transitions_coins[i].value + "</font></div>")
+        } else {
+            div.append("<div class='text-monospace bg-light col-2 mr-4 h5 mb-4 pt-2 rounded shadow'style='border: 1px black dotted;'>&darr;<font class='font-weight-bold text-danger'>" + _transitions_coins[i].saleCoin.price + " " + _transitions_coins[i].saleCoin.symbol + "</font><br>&uarr;<font class='font-weight-bold text-success'>" + _transitions_coins[i].price + " " + _transitions_coins[i].symbol + "</font><hr class='my-1'style='border: 1px black dotted;'> &darr;<font class='font-weight-bold text-danger'>" + _transitions_coins[i].value + "</font></div>")
+        }
+
     }
 });
