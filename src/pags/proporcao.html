@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/bootstrap.min.css'>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 sticky-top" id="navbar" style="transition: 0.5s;">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav mr-auto nav-pills nav-fill">
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="index.html">Minhas moedas</a>
+                    </li>
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="conversao.html">Conversão</a>
+                    </li>
+
+                    <li class="col nav-item">
+                        <a class="nav-link" href="proporcao.html">Proporção</a>
+                    </li>
+
+                </ul>
+                <form autocomplete="off" class="form-inline my-2 my-lg-0">
+
+                    <div class="dropdown">
+                        <input class="form-control mr-sm-2 dropdown-toggle" type="search" id="pesquisarMangaAjax"
+                            placeholder="Pesquisar" aria-label="Pesquisar" data-toggle="dropdown">
+
+                        <div class="dropdown-menu" id='dropPesquisa' aria-labelledby="dropdownMenuButton">
+
+                        </div>
+
+                    </div>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                    Moeda de venda:
+                </label>
+
+
+            </div>
+            <input type="text" class="form-control" id="moedaVendaInput">
+
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <label class="input-group-text" style="border-radius: 5px 0px 0px 5px;" for="inputGroupSelect01">
+                    Moeda de compra:
+                </label>
+            </div>
+            <select class="custom-select" id="moedaCompraInput"></select>
+        </div>
+        <div class="container-fluid">
+
+            <div id="buycoin" class="ml-5 mb-4">
+                <div class='h4' data-toggle="tooltip" data-html="true" title="Esse é o valor de 1 dolar para real">
+                    USDTBRL: 5,5000000</div>
+            </div>
+            <div id="moedas" class="row justify-content-center">
+
+                <div class='text-monospace bg-light col-2 mr-4 h5 mb-4 pt-2 rounded shadow'
+                    style='border: 1px black dotted;'>&darr;<font class='font-weight-bold text-danger'
+                        data-toggle="tooltip" data-html="true" title="Esse é o valor de 1 bitcoin em real">100650 BTCBRL
+                    </font><br>&uarr;<font class='font-weight-bold text-success' data-toggle="tooltip" data-html="true"
+                        title="Esse é o valor de quanto vale 1 bitcoin para dolar">19500 BTCUSDT</font>
+                    <hr class='my-1' style='border: 1px black dotted;'> &darr;<font
+                        class='font-weight-bold text-success' data-toggle="tooltip" data-html="true"
+                        title="Aqui é o quociente da divisão dos numeros acima">5,161538462</font>
+                </div>
+
+                <div class='text-monospace bg-light col-2 mr-4 h5 mb-4 pt-2 rounded shadow'
+                    style='border: 1px black dotted;'>&darr;<font class='font-weight-bold text-danger'>110650 BTCBRL
+                    </font><br>&uarr;<font class='font-weight-bold text-success'>19600 BTCUSDT</font>
+                    <hr class='my-1' style='border: 1px black dotted;'> &darr;<font class='font-weight-bold text-danger'
+                        data-toggle="tooltip" data-html="true" title="">5,645408163</font>
+                </div>
+                <div class="w-100"></div>
+                <div class="h4">Se o valor do quociente for menor que 5,5 pode valer a
+                    pena vender real para bitcoin </div>
+                <div class="w-100"></div>
+                <div class="h4">e bitcoin para dolar então o quociente ficara verde, se não ficara vermelho</div>
+                <div class="w-100"></div>
+                <div class="h4 text-danger font-weight-bold">Lembrando que não levamos em conta a taxa de cada trade
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src='../js/jquery-3.3.1.slim.min.js'></script>
+    <script src='../js/popper.min.js'></script>
+    <script src='../js/bootstrap.min.js'></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/proporcao.js"></script>
+</body>
+
+</html>
