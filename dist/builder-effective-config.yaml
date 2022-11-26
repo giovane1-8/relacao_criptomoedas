@@ -1,0 +1,6 @@
+directories:
+  output: dist
+  buildResources: build
+appId: moedas
+files: []
+electronVersion: 20.3.7
